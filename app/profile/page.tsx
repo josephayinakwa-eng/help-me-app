@@ -1,93 +1,226 @@
+"use client"
+
 import Link from "next/link"
+import { useEffect, useState } from "react"
 import {
-  Bookmark,
-  ChevronRight,
   FileText,
   HelpCircle,
+  LogOut,
   Settings,
-  Shield,
   User,
 } from "lucide-react"
-import { ScreenHeader } from "@/components/screen-header"
 
-const savedStats = [
-  { label: "Saved", value: "6" },
-  { label: "Applications", value: "2" },
-  { label: "Documents", value: "4" },
-]
+type Account = {
+  name: string
+  email: string
+}
 
-const menu = [
-  { icon: Bookmark, label: "Saved services", href: "/services", accent: "text-chart-1" },
-  { icon: FileText, label: "My documents", href: "/travel", accent: "text-chart-2" },
-  { icon: Shield, label: "Privacy & safety", href: "/settings", accent: "text-chart-5" },
-  { icon: HelpCircle, label: "Help & support", href: "/ai", accent: "text-chart-3" },
-  { icon: Settings, label: "Settings", href: "/settings", accent: "text-muted-foreground" },
-]
+type HelpRequest = {
+  id: string
+  category: string
+  request: string
+  message: string
+  country: string
+  createdAt: string
+}
 
 export default function ProfilePage() {
-  return (
-    <>
-      <ScreenHeader
-        title="Profile"
-        subtitle="Your account and saved help"
-        backHref="/"
-        right={
-          <Link
-            href="/settings"
-            aria-label="Settings"
-            className="grid size-9 place-items-center rounded-full border border-border bg-card text-foreground transition-colors hover:bg-secondary"
-          >
-            <Settings className="size-5" />
-          </Link>
-        }
-      />
+  const [account, setAccount] = useState<Account | null>(null)
+  const [requests, setRequests] = useState<HelpRequest[]>([])
 
-      <main className="mx-auto w-full max-w-md flex-1 space-y-5 px-4 pb-8 pt-5">
-        <section className="flex items-center gap-4 rounded-2xl border border-border bg-card p-4">
-          <span className="grid size-14 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground">
-            <User className="size-7" />
-          </span>
-          <div className="min-w-0 flex-1">
-            <h2 className="truncate text-lg font-bold text-card-foreground">Guest user</h2>
-            <p className="text-sm text-muted-foreground">Sign in to save your progress</p>
+  useEffect(() => {
+    try {
+      const savedAccount = localStorage.getItem("help-me-account")
+      const savedRequests = localStorage.getItem("help-me-requests")
+
+      if (savedAccount) {
+        setAccount(JSON.parse(savedAccount))
+      }
+
+      if (savedRequests) {
+        setRequests(JSON.parse(savedRequests))
+      }
+    } catch {
+      setAccount(null)
+      setRequests([])
+    }
+  }, [])
+
+  function signOut() {
+    setAccount(null)
+  }
+
+  return (
+    <main className="min-h-screen bg-background px-4 py-8">
+      <div className="mx-auto w-full max-w-md">
+
+        <Link
+          href="/"
+          className="text-sm font-medium text-primary"
+        >
+          ← Back to HELP ME
+        </Link>
+
+        <section className="mt-6 rounded-3xl border border-border bg-card p-6 shadow-sm">
+          {account ? (
+            <div className="flex items-center gap-4">
+              <div className="grid size-16 shrink-0 place-items-center rounded-full bg-primary text-xl font-bold text-primary-foreground">
+                {account.name.charAt(0).toUpperCase()}
+              </div>
+
+              <div className="min-w-0">
+                <h1 className="text-xl font-bold text-foreground">
+                  {account.name}
+                </h1>
+
+                <p className="mt-1 truncate text-sm text-muted-foreground">
+                  {account.email}
+                </p>
+              </div>
+            </div>
+          ) : (
+            <div>
+              <div className="grid size-16 place-items-center rounded-full bg-secondary">
+                <User className="size-7" />
+              </div>
+
+              <h1 className="mt-4 text-2xl font-bold text-foreground">
+                Guest User
+              </h1>
+
+              <p className="mt-2 text-sm text-muted-foreground">
+                Sign in or create an account to save your progress.
+              </p>
+
+              <Link
+                href="/account"
+                className="mt-5 block rounded-2xl bg-primary px-4 py-3 text-center font-semibold text-primary-foreground"
+              >
+                Sign in or Create an Account
+              </Link>
+            </div>
+          )}
+        </section>
+
+        <section className="mt-4 grid grid-cols-2 gap-3">
+          <div className="rounded-2xl border border-border bg-card p-4">
+            <p className="text-2xl font-bold text-foreground">
+              {requests.length}
+            </p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Help requests
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border bg-card p-4">
+            <p className="text-2xl font-bold text-foreground">
+              {account ? "Active" : "Guest"}
+            </p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Account status
+            </p>
           </div>
         </section>
 
-        <section className="grid grid-cols-3 gap-3">
-          {savedStats.map((s) => (
-            <div key={s.label} className="rounded-2xl border border-border bg-card p-4 text-center">
-              <p className="text-xl font-bold text-foreground">{s.value}</p>
-              <p className="mt-0.5 text-xs text-muted-foreground">{s.label}</p>
-            </div>
-          ))}
-        </section>
+        <section className="mt-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-bold text-foreground">
+              My Help Requests
+            </h2>
 
-        <section className="overflow-hidden rounded-2xl border border-border bg-card">
-          {menu.map((item, i) => {
-            const Icon = item.icon
-            return (
+            <span className="text-sm text-muted-foreground">
+              {requests.length}
+            </span>
+          </div>
+
+          {requests.length === 0 ? (
+            <div className="mt-3 rounded-2xl border border-border bg-card p-5">
+              <p className="text-sm text-muted-foreground">
+                You have not submitted any help requests yet.
+              </p>
+
               <Link
-                key={item.label}
-                href={item.href}
-                className={`flex items-center gap-3 px-4 py-3.5 transition-colors hover:bg-secondary/60 ${
-                  i !== menu.length - 1 ? "border-b border-border" : ""
-                }`}
+                href="/"
+                className="mt-4 inline-block text-sm font-semibold text-primary"
               >
-                <Icon className={`size-5 ${item.accent}`} />
-                <span className="flex-1 font-medium text-card-foreground">{item.label}</span>
-                <ChevronRight className="size-5 text-muted-foreground" />
+                Find help →
               </Link>
-            )
-          })}
+            </div>
+          ) : (
+            <div className="mt-3 space-y-3">
+              {requests
+                .slice()
+                .reverse()
+                .map((item) => (
+                  <div
+                    key={item.id}
+                    className="rounded-2xl border border-border bg-card p-5 shadow-sm"
+                  >
+                    <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                      {item.category}
+                    </p>
+
+                    <h3 className="mt-1 font-bold text-foreground">
+                      {item.request}
+                    </h3>
+
+                    <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                      {item.message}
+                    </p>
+
+                    {item.country && (
+                      <p className="mt-3 text-xs text-muted-foreground">
+                        Country: {item.country}
+                      </p>
+                    )}
+
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      Submitted: {item.createdAt}
+                    </p>
+                  </div>
+                ))}
+            </div>
+          )}
         </section>
 
-        <Link
-          href="/ai"
-          className="flex w-full items-center justify-center rounded-2xl bg-primary py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
-        >
-          Sign in or create an account
-        </Link>
-      </main>
-    </>
+        <section className="mt-6 space-y-3">
+          <Link
+            href="/saved-services"
+            className="flex items-center gap-3 rounded-2xl border border-border bg-card p-4 font-semibold text-foreground"
+          >
+            <FileText className="size-5" />
+            Saved Services
+          </Link>
+
+          <Link
+            href="/settings"
+            className="flex items-center gap-3 rounded-2xl border border-border bg-card p-4 font-semibold text-foreground"
+          >
+            <Settings className="size-5" />
+            Settings
+          </Link>
+
+          <Link
+            href="/help"
+            className="flex items-center gap-3 rounded-2xl border border-border bg-card p-4 font-semibold text-foreground"
+          >
+            <HelpCircle className="size-5" />
+            Help & Support
+          </Link>
+
+          {account && (
+            <button
+              type="button"
+              onClick={signOut}
+              className="flex w-full items-center gap-3 rounded-2xl border border-destructive/30 bg-destructive/5 p-4 font-semibold text-destructive"
+            >
+              <LogOut className="size-5" />
+              Sign Out
+            </button>
+          )}
+        </section>
+
+      </div>
+    </main>
   )
 }
