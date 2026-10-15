@@ -19,7 +19,6 @@ export type Category = {
   icon: LucideIcon
   tagline: string
   description: string
-  /** tailwind text color token class for the icon */
   accent: string
   items: {
     title: string
@@ -34,89 +33,220 @@ export const categories: Category[] = [
     title: "Jobs",
     href: "/jobs",
     icon: Briefcase,
-    tagline: "Find work & build your CV",
-    description: "Search local roles, get help writing your CV, and prepare for interviews.",
+    tagline: "Find work & build your career",
+    description:
+      "Find work opportunities, improve your CV or resume, prepare for interviews, and get help with applications.",
     accent: "text-chart-1",
     items: [
-      { title: "Warehouse Operative", meta: "Full time · £12.20/hr", description: "Manchester · No experience needed, training provided." },
-      { title: "Care Assistant", meta: "Part time · £11.80/hr", description: "Leeds · Flexible shifts, DBS support available." },
-      { title: "Delivery Driver", meta: "Flexible · £13/hr", description: "Own hours · Valid UK licence required." },
-      { title: "Customer Support", meta: "Remote · £22,000/yr", description: "Work from home · Full training included." },
+      {
+        title: "Find a Job",
+        meta: "Local & online",
+        description:
+          "Explore job opportunities based on your location, experience, and skills.",
+      },
+      {
+        title: "Create a CV or Resume",
+        meta: "Career help",
+        description:
+          "Get help creating or improving your CV or resume.",
+      },
+      {
+        title: "Job Application Help",
+        meta: "Application support",
+        description:
+          "Get guidance when applying for jobs and completing applications.",
+      },
+      {
+        title: "Interview Preparation",
+        meta: "Career support",
+        description:
+          "Practice interview questions and prepare for your next interview.",
+      },
     ],
   },
+
   {
     slug: "housing",
     title: "Housing",
     href: "/housing",
     icon: Home,
-    tagline: "Somewhere safe to stay",
-    description: "Emergency shelter, affordable housing options, and tenancy support.",
+    tagline: "Find a safe place to live",
+    description:
+      "Find housing, rooms, shelters, rental support, and information about housing problems.",
     accent: "text-chart-2",
     items: [
-      { title: "Emergency shelter tonight", meta: "Available now", description: "Find a safe bed near you within the next few hours." },
-      { title: "Council housing register", meta: "Guide", description: "Step-by-step help to join your local housing list." },
-      { title: "Rent deposit scheme", meta: "Financial help", description: "Support with up-front costs for a private tenancy." },
-      { title: "Report a housing problem", meta: "Tenant rights", description: "Damp, repairs, or an unsafe landlord? Get help here." },
+      {
+        title: "Find a Place to Live",
+        meta: "Housing search",
+        description:
+          "Search for homes, apartments, rooms, and other accommodation.",
+      },
+      {
+        title: "Find Affordable Housing",
+        meta: "Housing support",
+        description:
+          "Find affordable housing options and organizations that may help.",
+      },
+      {
+        title: "Emergency Shelter",
+        meta: "Urgent support",
+        description:
+          "Find emergency accommodation and temporary shelter near you.",
+      },
+      {
+        title: "Housing Problems",
+        meta: "Support",
+        description:
+          "Get guidance about rent, repairs, unsafe housing, or tenancy problems.",
+      },
     ],
   },
+
   {
     slug: "money",
     title: "Money Help",
     href: "/money",
     icon: Wallet,
-    tagline: "Benefits, debt & budgeting",
-    description: "Check what you can claim, get debt advice, and manage your budget.",
+    tagline: "Money, food & financial support",
+    description:
+      "Find financial assistance, food support, budgeting help, and local resources.",
     accent: "text-chart-3",
     items: [
-      { title: "Benefits calculator", meta: "5 min check", description: "See what support you may be entitled to claim." },
-      { title: "Emergency food & funds", meta: "Available now", description: "Local food banks and crisis grants near you." },
-      { title: "Free debt advice", meta: "Confidential", description: "Speak to a trained adviser about what you owe." },
-      { title: "Budgeting planner", meta: "Tool", description: "Track income and spending in one simple place." },
+      {
+        title: "Financial Assistance",
+        meta: "Support",
+        description:
+          "Find financial assistance and support available in your country or area.",
+      },
+      {
+        title: "Food Assistance",
+        meta: "Local support",
+        description:
+          "Find food banks, community food programs, and other food support.",
+      },
+      {
+        title: "Help With Bills",
+        meta: "Financial support",
+        description:
+          "Find organizations that may help with essential household expenses.",
+      },
+      {
+        title: "Budgeting Help",
+        meta: "Money management",
+        description:
+          "Learn how to manage income, spending, saving, and debt.",
+      },
     ],
   },
+
   {
     slug: "health",
     title: "Health & Care",
     href: "/health",
     icon: HeartPulse,
-    tagline: "Look after yourself",
-    description: "Register with a doctor, find urgent care, and access mental health support.",
+    tagline: "Find health & care support",
+    description:
+      "Find doctors, clinics, hospitals, pharmacies, health information, and care services.",
     accent: "text-chart-5",
     items: [
-      { title: "Register with a GP", meta: "Guide", description: "You can register even without a fixed address." },
-      { title: "Urgent care near me", meta: "Available now", description: "Find the nearest walk-in centre or pharmacy." },
-      { title: "Mental health support", meta: "24/7", description: "Talk to someone now if you are struggling to cope." },
-      { title: "Free prescriptions check", meta: "2 min check", description: "Find out if you qualify for help with costs." },
+      {
+        title: "Find a Doctor or Clinic",
+        meta: "Healthcare",
+        description:
+          "Find healthcare providers and clinics near your location.",
+      },
+      {
+        title: "Find a Hospital",
+        meta: "Healthcare",
+        description:
+          "Find hospitals and other healthcare facilities near you.",
+      },
+      {
+        title: "Find a Pharmacy",
+        meta: "Medicine support",
+        description:
+          "Find pharmacies and information about accessing medicines.",
+      },
+      {
+        title: "Mental Health Support",
+        meta: "Wellbeing",
+        description:
+          "Find mental health and emotional support services.",
+      },
     ],
   },
+
   {
     slug: "education",
     title: "Education",
     href: "/education",
     icon: GraduationCap,
-    tagline: "Learn new skills",
-    description: "Free courses, English classes, and support for children's schooling.",
+    tagline: "Learn, study & build skills",
+    description:
+      "Find schools, universities, courses, scholarships, training, and education support.",
     accent: "text-chart-4",
     items: [
-      { title: "Free English (ESOL) classes", meta: "Local", description: "Improve your English speaking and writing for free." },
-      { title: "Basic digital skills", meta: "Beginner", description: "Learn to use a phone, email, and the internet." },
-      { title: "School places for children", meta: "Guide", description: "How to apply for a school place mid-year." },
-      { title: "Adult learning grants", meta: "Funding", description: "Money to help you retrain or return to study." },
+      {
+        title: "Find a School",
+        meta: "Education",
+        description:
+          "Find schools and educational opportunities in your area.",
+      },
+      {
+        title: "Find a University",
+        meta: "Higher education",
+        description:
+          "Explore universities, colleges, and higher education options.",
+      },
+      {
+        title: "Find Scholarships",
+        meta: "Education funding",
+        description:
+          "Find scholarships and other education funding opportunities.",
+      },
+      {
+        title: "Find Courses & Training",
+        meta: "Skills",
+        description:
+          "Find courses and training to develop new skills.",
+      },
     ],
   },
+
   {
     slug: "travel",
     title: "Travel & Documents",
     href: "/travel",
     icon: Plane,
-    tagline: "IDs, papers & getting around",
-    description: "Replace lost documents, understand your status, and plan travel.",
+    tagline: "Travel, IDs & important documents",
+    description:
+      "Get help understanding passports, visas, identification, travel documents, and travel requirements.",
     accent: "text-chart-2",
     items: [
-      { title: "Replace a lost ID", meta: "Guide", description: "Steps to replace a passport, BRP, or driving licence." },
-      { title: "Immigration advice", meta: "Confidential", description: "Free, regulated advice about your status and rights." },
-      { title: "Free travel help", meta: "Local", description: "Bus passes and travel support if you're on a low income." },
-      { title: "Translate a document", meta: "Tool", description: "Get official letters translated into your language." },
+      {
+        title: "Passport Help",
+        meta: "Documents",
+        description:
+          "Find information about applying for or replacing a passport.",
+      },
+      {
+        title: "Visa Information",
+        meta: "Travel",
+        description:
+          "Learn about visa requirements and application processes.",
+      },
+      {
+        title: "Replace a Lost Document",
+        meta: "Document support",
+        description:
+          "Find guidance for replacing lost or damaged important documents.",
+      },
+      {
+        title: "Travel Requirements",
+        meta: "Travel information",
+        description:
+          "Check travel and entry requirements for your destination.",
+      },
     ],
   },
 ]
@@ -126,8 +256,9 @@ export const findService = {
   title: "Find a Service",
   href: "/services",
   icon: Compass,
-  tagline: "Search everything in one place",
-  description: "Search across every HELP ME category and local support service.",
+  tagline: "Search useful services near you",
+  description:
+    "Search for local businesses, organizations, professionals, and support services.",
 }
 
 export type NavItem = {

@@ -11,6 +11,10 @@
   "dependencies": {
     "@ai-sdk/openai": "^4.0.66",
     "@base-ui/react": "^1.5.0",
+    "@capacitor/android": "^8.5.2",
+    "@capacitor/cli": "^8.5.2",
+    "@capacitor/core": "^8.5.2",
+    "@supabase/supabase-js": "^2.116.0",
     "@vercel/analytics": "1.6.1",
     "ai": "^7.0.99",
     "class-variance-authority": "^0.7.1",
