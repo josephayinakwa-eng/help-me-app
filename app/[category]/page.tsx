@@ -1,24 +1,32 @@
-import { notFound } from "next/navigation"
+"use client"
+
+import { useEffect, useState } from "react"
+import { notFound, useParams } from "next/navigation"
 import { ScreenHeader } from "@/components/screen-header"
 import { ResourceItem } from "@/components/resource-item"
-import { categories, getCategory } from "@/lib/app-data"
+import { categories, getCategory, getResourceHref } from "@/lib/app-data"
 
-export function generateStaticParams() {
-  return categories.map(function (category) {
-    return {
-      category: category.slug,
+export default function CategoryPage() {
+  const params = useParams<{ category: string }>()
+  const slug = params.category
+  const data = getCategory(slug)
+
+  const [country, setCountry] = useState("Ghana")
+
+  useEffect(() => {
+    function loadCountry() {
+      const savedCountry = localStorage.getItem("help-me-country")
+      setCountry(savedCountry || "Ghana")
     }
-  })
-}
 
-export default async function CategoryPage({
-  params,
-}: {
-  params: Promise<{ category: string }>
-}) {
-  const result = await params
-  const category = result.category
-  const data = getCategory(category)
+    loadCountry()
+
+    window.addEventListener("help-me-country-changed", loadCountry)
+
+    return () => {
+      window.removeEventListener("help-me-country-changed", loadCountry)
+    }
+  }, [])
 
   if (!data) {
     notFound()
@@ -40,9 +48,15 @@ export default async function CategoryPage({
             <Icon className="size-6" />
           </span>
 
-          <p className="text-sm leading-relaxed text-muted-foreground">
-            {data.description}
-          </p>
+          <div>
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              {data.description}
+            </p>
+
+            <p className="mt-2 text-sm font-semibold text-foreground">
+              Selected country: {country}
+            </p>
+          </div>
         </section>
 
         <section className="space-y-3">
@@ -50,13 +64,18 @@ export default async function CategoryPage({
             Helpful resources
           </h2>
 
-          {data.items.map(function (item) {
+          {data.items.map((item) => {
+            const resourceHref = item.search
+              ? getResourceHref(item.search, country)
+              : item.href
+
             return (
               <ResourceItem
                 key={item.title}
                 title={item.title}
                 description={item.description}
-                href={item.href}
+                meta={item.meta}
+                href={resourceHref}
               />
             )
           })}

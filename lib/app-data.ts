@@ -19,12 +19,13 @@ export type Category = {
   icon: LucideIcon
   tagline: string
   description: string
-  /** tailwind text color token class for the icon */
   accent: string
   items: {
     title: string
     meta: string
     description: string
+    href?: string
+    search?: string
   }[]
 }
 
@@ -34,14 +35,34 @@ export const categories: Category[] = [
     title: "Jobs",
     href: "/jobs",
     icon: Briefcase,
-    tagline: "Find work & build your CV",
-    description: "Search local roles, get help writing your CV, and prepare for interviews.",
+    tagline: "Find work and build your CV",
+    description: "Explore job opportunities, prepare your CV, and find help with applications.",
     accent: "text-chart-1",
     items: [
-      { title: "Warehouse Operative", meta: "Full time · £12.20/hr", description: "Manchester · No experience needed, training provided." },
-      { title: "Care Assistant", meta: "Part time · £11.80/hr", description: "Leeds · Flexible shifts, DBS support available." },
-      { title: "Delivery Driver", meta: "Flexible · £13/hr", description: "Own hours · Valid UK licence required." },
-      { title: "Customer Support", meta: "Remote · £22,000/yr", description: "Work from home · Full training included." },
+      {
+        title: "Warehouse Operative",
+        meta: "Search current vacancies",
+        description: "Explore warehouse jobs and check the requirements before applying.",
+        search: "warehouse operative jobs",
+      },
+      {
+        title: "Care Assistant",
+        meta: "Search current vacancies",
+        description: "Explore care assistant jobs and check the requirements before applying.",
+        search: "care assistant jobs",
+      },
+      {
+        title: "Delivery Driver",
+        meta: "Search current vacancies",
+        description: "Explore delivery driver jobs and check the requirements before applying.",
+        search: "delivery driver jobs",
+      },
+      {
+        title: "Customer Support",
+        meta: "Search current vacancies",
+        description: "Explore customer support jobs, including remote opportunities.",
+        search: "customer support jobs",
+      },
     ],
   },
   {
@@ -50,13 +71,33 @@ export const categories: Category[] = [
     href: "/housing",
     icon: Home,
     tagline: "Somewhere safe to stay",
-    description: "Emergency shelter, affordable housing options, and tenancy support.",
+    description: "Explore emergency shelter, affordable housing, and tenancy support.",
     accent: "text-chart-2",
     items: [
-      { title: "Emergency shelter tonight", meta: "Available now", description: "Find a safe bed near you within the next few hours." },
-      { title: "Council housing register", meta: "Guide", description: "Step-by-step help to join your local housing list." },
-      { title: "Rent deposit scheme", meta: "Financial help", description: "Support with up-front costs for a private tenancy." },
-      { title: "Report a housing problem", meta: "Tenant rights", description: "Damp, repairs, or an unsafe landlord? Get help here." },
+      {
+        title: "Emergency shelter",
+        meta: "Find local support",
+        description: "Search for emergency accommodation and safe places to stay.",
+        search: "emergency shelter housing assistance",
+      },
+      {
+        title: "Affordable housing",
+        meta: "Housing information",
+        description: "Explore affordable housing options and local housing programmes.",
+        search: "affordable housing assistance",
+      },
+      {
+        title: "Rent deposit assistance",
+        meta: "Financial support",
+        description: "Find programmes that may help with rental deposits and moving costs.",
+        search: "rent deposit assistance programmes",
+      },
+      {
+        title: "Tenant rights",
+        meta: "Housing guidance",
+        description: "Learn about tenant rights and how to get help with housing problems.",
+        search: "tenant rights housing advice",
+      },
     ],
   },
   {
@@ -64,14 +105,34 @@ export const categories: Category[] = [
     title: "Money Help",
     href: "/money",
     icon: Wallet,
-    tagline: "Benefits, debt & budgeting",
-    description: "Check what you can claim, get debt advice, and manage your budget.",
+    tagline: "Benefits, food and budgeting",
+    description: "Explore financial assistance, food support, debt advice, and budgeting resources.",
     accent: "text-chart-3",
     items: [
-      { title: "Benefits calculator", meta: "5 min check", description: "See what support you may be entitled to claim." },
-      { title: "Emergency food & funds", meta: "Available now", description: "Local food banks and crisis grants near you." },
-      { title: "Free debt advice", meta: "Confidential", description: "Speak to a trained adviser about what you owe." },
-      { title: "Budgeting planner", meta: "Tool", description: "Track income and spending in one simple place." },
+      {
+        title: "Financial assistance",
+        meta: "Find support",
+        description: "Search for financial assistance programmes in your area.",
+        search: "financial assistance programmes",
+      },
+      {
+        title: "Emergency food assistance",
+        meta: "Food support",
+        description: "Find food banks, community kitchens, and emergency food programmes.",
+        search: "emergency food assistance",
+      },
+      {
+        title: "Free debt advice",
+        meta: "Money guidance",
+        description: "Find organisations that offer debt advice and financial guidance.",
+        search: "free debt advice",
+      },
+      {
+        title: "Budgeting help",
+        meta: "Manage your money",
+        description: "Learn how to plan spending, manage income, and build a budget.",
+        search: "free budgeting help",
+      },
     ],
   },
   {
@@ -80,13 +141,33 @@ export const categories: Category[] = [
     href: "/health",
     icon: HeartPulse,
     tagline: "Look after yourself",
-    description: "Register with a doctor, find urgent care, and access mental health support.",
+    description: "Find healthcare services, urgent care information, and wellbeing support.",
     accent: "text-chart-5",
     items: [
-      { title: "Register with a GP", meta: "Guide", description: "You can register even without a fixed address." },
-      { title: "Urgent care near me", meta: "Available now", description: "Find the nearest walk-in centre or pharmacy." },
-      { title: "Mental health support", meta: "24/7", description: "Talk to someone now if you are struggling to cope." },
-      { title: "Free prescriptions check", meta: "2 min check", description: "Find out if you qualify for help with costs." },
+      {
+        title: "Find a doctor",
+        meta: "Healthcare services",
+        description: "Search for doctors and healthcare providers in your area.",
+        search: "healthcare clinics",
+      },
+      {
+        title: "Urgent medical care",
+        meta: "Find medical help",
+        description: "Find medical facilities and urgent healthcare services.",
+        search: "urgent medical care",
+      },
+      {
+        title: "Mental health support",
+        meta: "Wellbeing resources",
+        description: "Find mental health services and organisations offering support.",
+        search: "mental health support services",
+      },
+      {
+        title: "Affordable healthcare",
+        meta: "Healthcare information",
+        description: "Explore healthcare assistance and affordable treatment options.",
+        search: "affordable healthcare assistance",
+      },
     ],
   },
   {
@@ -95,13 +176,33 @@ export const categories: Category[] = [
     href: "/education",
     icon: GraduationCap,
     tagline: "Learn new skills",
-    description: "Free courses, English classes, and support for children's schooling.",
+    description: "Discover courses, scholarships, digital skills training, and educational support.",
     accent: "text-chart-4",
     items: [
-      { title: "Free English (ESOL) classes", meta: "Local", description: "Improve your English speaking and writing for free." },
-      { title: "Basic digital skills", meta: "Beginner", description: "Learn to use a phone, email, and the internet." },
-      { title: "School places for children", meta: "Guide", description: "How to apply for a school place mid-year." },
-      { title: "Adult learning grants", meta: "Funding", description: "Money to help you retrain or return to study." },
+      {
+        title: "Free online courses",
+        meta: "Learn new skills",
+        description: "Explore free courses and training opportunities online.",
+        search: "free online courses",
+      },
+      {
+        title: "Digital skills training",
+        meta: "Beginner friendly",
+        description: "Find resources to learn computer, internet, and digital skills.",
+        search: "free digital skills training",
+      },
+      {
+        title: "Scholarships",
+        meta: "Education funding",
+        description: "Search for scholarships and financial support for students.",
+        search: "scholarships for students",
+      },
+      {
+        title: "Vocational training",
+        meta: "Career development",
+        description: "Explore practical training programmes that can help you find work.",
+        search: "vocational training programmes",
+      },
     ],
   },
   {
@@ -109,17 +210,50 @@ export const categories: Category[] = [
     title: "Travel & Documents",
     href: "/travel",
     icon: Plane,
-    tagline: "IDs, papers & getting around",
-    description: "Replace lost documents, understand your status, and plan travel.",
+    tagline: "IDs, papers and getting around",
+    description: "Find information about travel documents, official paperwork, and travel assistance.",
     accent: "text-chart-2",
     items: [
-      { title: "Replace a lost ID", meta: "Guide", description: "Steps to replace a passport, BRP, or driving licence." },
-      { title: "Immigration advice", meta: "Confidential", description: "Free, regulated advice about your status and rights." },
-      { title: "Free travel help", meta: "Local", description: "Bus passes and travel support if you're on a low income." },
-      { title: "Translate a document", meta: "Tool", description: "Get official letters translated into your language." },
+      {
+        title: "Replace a lost ID",
+        meta: "Document guidance",
+        description: "Find official information about replacing a lost identity document.",
+        search: "official government lost ID replacement",
+      },
+      {
+        title: "Immigration information",
+        meta: "Official guidance",
+        description: "Find official immigration information for your destination country.",
+        search: "official government immigration information",
+      },
+      {
+        title: "Travel assistance",
+        meta: "Travel support",
+        description: "Search for travel assistance programmes and affordable transport options.",
+        search: "travel assistance programmes",
+      },
+      {
+        title: "Document translation",
+        meta: "Translation services",
+        description: "Find document translation services and information about certified translations.",
+        search: "certified document translation services",
+      },
     ],
   },
 ]
+
+export function getResourceHref(search: string, country?: string) {
+  const selectedCountry =
+    country ||
+    (typeof window !== "undefined"
+      ? localStorage.getItem("help-me-country")
+      : null) ||
+    "Ghana"
+
+  const query = search + " in " + selectedCountry
+
+  return "https://www.google.com/search?q=" + encodeURIComponent(query)
+}
 
 export const findService = {
   slug: "services",
@@ -127,7 +261,7 @@ export const findService = {
   href: "/services",
   icon: Compass,
   tagline: "Search everything in one place",
-  description: "Search across every HELP ME category and local support service.",
+  description: "Search across every HELP ME category and discover useful support resources.",
 }
 
 export type NavItem = {
@@ -145,5 +279,5 @@ export const bottomNav: NavItem[] = [
 ]
 
 export function getCategory(slug: string) {
-  return categories.find((c) => c.slug === slug)
+  return categories.find((category) => category.slug === slug)
 }
